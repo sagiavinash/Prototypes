@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	#display{
+		height:40px;
+		-webkit-box-sizing:border-box;
+		overflow:hidden;
+	}
+	#next{
+		display:none;
+		opacity:0;
+	}
+	p{
+		margin:0;
+		padding:0;
+	}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$(".btn1").click(function(){
+			$("p#prev").animate({"marginTop":"-20px","opacity":"0"}, {
+				queue:    false,
+				duration: 400,
+				complete: function() { 
+					$("p#prev").css("display","none");
+				}
+			});
+			$("p#next").css("display","block");
+			$("p#next").animate({"opacity":"1"});
+		});
+		$(".btn2").click(function(){
+			$("p#prev").css("display","block");
+			$("p#prev").animate({"marginTop":"0px","opacity":"1"});
+			$("p#next").animate({"opacity":"0"}, {
+				queue:    false,
+				duration: 400,
+				complete: function() { 
+					$("p#next").css("display","none");
+				}
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="display">
+		<p id="prev">This is a paragraph.</p>
+		<p id="next">This is next paragraph.</p>
+	</div>
+	<button class="btn1">Slide up</button>
+	<button class="btn2">Slide down</button>
+</body>
+</html>
