@@ -20,24 +20,24 @@
 <script>
 	$(document).ready(function(){
 		$(".btn1").click(function(){
-			$("p#prev").animate({"marginTop":"-20px","opacity":"0"}, {
+			$("#prev").animate({"marginTop":"-20px","opacity":"0"}, {
 				queue:    false,
 				duration: 400,
 				complete: function() { 
-					$("p#prev").css("display","none");
+					$("#prev").css("display","none");
 				}
 			});
-			$("p#next").css("display","block");
-			$("p#next").animate({"opacity":"1"});
+			$("#next").css("display","block");
+			$("#next").animate({"opacity":"1"});
 		});
 		$(".btn2").click(function(){
-			$("p#prev").css("display","block");
-			$("p#prev").animate({"marginTop":"0px","opacity":"1"});
-			$("p#next").animate({"opacity":"0"}, {
+			$("#prev").css("display","block");
+			$("#prev").animate({"marginTop":"0px","opacity":"1"});
+			$("#next").animate({"opacity":"0"}, {
 				queue:    false,
 				duration: 400,
 				complete: function() { 
-					$("p#next").css("display","none");
+					$("#next").css("display","none");
 				}
 			});
 		});
