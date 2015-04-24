@@ -1,63 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	.vending-text-container {
-		height:20px;
-		-webkit-box-sizing:border-box;
-		-moz-box-sizing:border-box;
-		-o-box-sizing:border-box;
-		-ms-box-sizing:border-box;
-		box-sizing:border-box;
-		overflow:hidden;
-	}
-	p {
-		margin:0;
-		padding:0;
-	}
-</style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$(".btn-slide-up").click(function(){
-			var $active = $(".vending-text.active"),
-				$inactive = $(".vending-text").not(".active");
-			$active.animate({ "marginTop" : "-20px", "opacity" : "0" }, {
-				queue: false,
-				duration: 400,
-				complete: function() { 
-					$active.css("display", "none");
-					$active.toggleClass("active");
-					$inactive.toggleClass("active");
-				}
-			});
-			$inactive.css("display", "block");
-			$inactive.animate({ "opacity" : "1" });
-		});
-		$(".btn-slide-down").click(function(){
-			var $active = $(".vending-text.active"),
-				$inactive = $(".vending-text").not(".active");
-			$inactive.css("display", "block");
-			$inactive.animate({"marginTop" : "0px", "opacity" : "1"});
-			$active.animate({ "opacity" : "0" }, {
-				queue: false,
-				duration: 400,
-				complete: function() { 
-					$active.css("display", "none");
-					$active.toggleClass("active");
-					$inactive.toggleClass("active");
-				}
-			});
-		});
-	});
-</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<div class="vending-text-container">
-		<p class="vending-text active">This is a paragraph.</p>
-		<p class="vending-text">This is next paragraph.</p>
+		<p class="vending-text">This is paragraph 4.</p>
+		<p class="vending-text">This is paragraph 3.</p>
+		<p class="vending-text">This is paragraph 2.</p>
+		<p class="vending-text active">This is paragraph 1.</p>
 	</div>
-	<button class="btn-slide-up">Slide up</button>
-	<button class="btn-slide-down">Slide down</button>
+	<button class="btn-slide slide-up">Slide up</button>
+	<button class="btn-slide slide-down">Slide down</button>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$.fn.extend({
+		  reflow : function(){
+		    var trigger = $("body").offset().top;
+		    return this;
+		  },
+		  run: function(fn){
+		  	fn();
+		  	return this;
+		  }
+		});
+
+		$(".btn-slide").click(function(){
+			if($(".vending-text").data("play") == false) return;
+			$(".vending-text").data("play", false);
+			var $vendingList = $(".vending-text"),
+				index = {}, $current, $next, state = {}, dir;
+			dir = $(this).hasClass("slide-up") ? "up" : "down";
+			
+			index.current = $vendingList.index($vendingList.filter(".active"));
+			if(dir == "up"){
+				index.next = (index.current >= 1 ) ? (index.current - 1) : ($vendingList.length - 1);
+			} else {
+				index.next = (index.current + 1) % $vendingList.length;
+
+			}
+			
+			state = {
+				up : { current : "hide-top", next : "hide-bottom" },
+				down : { current : "hide-bottom", next : "hide-top" }
+			}
+
+			$current = $vendingList.eq(index.current);
+			$next = $vendingList.eq(index.next);
+			
+			$current.addClass("animate " + state[dir].current);
+			$current.removeClass("active");
+			$current.run(function(){
+				setTimeout(function(){
+					$current.addClass("hide");
+					$(".vending-text").data("play", true);
+				}, 400);
+			});
+
+			$next.removeClass("animate " + state[dir].current);
+			$next.addClass(state[dir].next);
+			$next.reflow();
+			$next.addClass("active animate");
+			$next.removeClass("hide " + state[dir].next);
+		});
+	});
+	</script>
 </body>
 </html>
