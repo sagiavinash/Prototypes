@@ -17,6 +17,7 @@ p {
 	position: absolute;
 	top:0;
 	background:white;
+	opacity:0;
 }
 .vending-text.animate{
 	-webkit-transition: all 0.4s;
@@ -25,8 +26,8 @@ p {
 	-ms-transition: all 0.4s;
 	transition: all 0.4s;
 }
-.vending-text.hide {
-	opacity:0;
+.vending-text.active {
+	opacity:1;
 }
 .vending-text.hide-top {
 	-webkit-transform: translateY(-20px);
