@@ -4,16 +4,37 @@
 	<link rel="stylesheet" type="text/css" href="lib/jquery.vending-text.css">
 </head>
 <body>
-	<div class="vending-text-container">
-		<p class="vending-text">This is paragraph 4.</p>
-		<p class="vending-text">This is paragraph 3.</p>
-		<p class="vending-text">This is paragraph 2.</p>
-		<p class="vending-text active">This is paragraph 1.</p>
+	<div class="vending-text-widget">
+		<div class="vending-list">
+			<p class="vending-list-item">This is paragraph 4.</p>
+			<p class="vending-list-item">This is paragraph 3.</p>
+			<p class="vending-list-item">This is paragraph 2.</p>
+			<p class="vending-list-item vending-active">This is paragraph 1.</p>
+		</div>
+		<button class="btn-vending-slide" data-slide="up">Slide up</button>
+		<button class="btn-vending-slide" data-slide="down">Slide down</button>
 	</div>
-	<button class="btn-slide slide-up">Slide up</button>
-	<button class="btn-slide slide-down">Slide down</button>
+	<br><br><br><br><br><br><br>
+	<div class="vending-text-widget">
+		<div class="vending-list">
+			<p class="vending-list-item">This is paragraph 4.</p>
+			<p class="vending-list-item">This is paragraph 3.</p>
+			<p class="vending-list-item">This is paragraph 2.</p>
+			<p class="vending-list-item vending-active">This is paragraph 1.</p>
+		</div>
+		<button class="btn-vending-slide" data-slide="up">Slide up</button>
+		<button class="btn-vending-slide" data-slide="down">Slide down</button>
+	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="lib/jquery.vending-text.js"></script>
+	<script>
+	$(document).ready(function(){
+		$(".vending-text-widget").vendingText();
+		$(".vending-text-widget").on("click", ".btn-vending-slide", function () {
+      		$(this).closest(".vending-text-widget").data("slide", $(this).data("slide")).vendingText("slide");
+		});
+    });
+	</script>
 </body>
 </html>

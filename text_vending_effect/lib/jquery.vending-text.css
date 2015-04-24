@@ -2,7 +2,7 @@ p {
 	padding:0;
 	margin:0;
 }
-.vending-text-container {
+.vending-list{
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-o-box-sizing:border-box;
@@ -12,31 +12,31 @@ p {
 	height:20px;
 	overflow:hidden;
 }
-.vending-text{
+.vending-list-item{
 	width: 100%;
 	position: absolute;
 	top:0;
 	background:white;
 	opacity:0;
 }
-.vending-text.animate{
+.vending-list-item.vending-animate{
 	-webkit-transition: all 0.4s;
 	-moz-transition: all 0.4s;
 	-o-transition: all 0.4s;
 	-ms-transition: all 0.4s;
 	transition: all 0.4s;
 }
-.vending-text.active {
+.vending-list-item.vending-active {
 	opacity:1;
 }
-.vending-text.hide-top {
+.vending-list-item.vending-hide-top {
 	-webkit-transform: translateY(-20px);
 	-moz-transform: translateY(-20px);
 	-o-transform: translateY(-20px);
 	-ms-transform: translateY(-20px);
 	transform: translateY(-20px);
 }
-.vending-text.hide-bottom {
+.vending-list-item.vending-hide-bottom {
 	-webkit-transform: translateY(20px);
 	-moz-transform: translateY(20px);
 	-o-transform: translateY(20px);
